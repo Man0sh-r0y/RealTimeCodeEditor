@@ -8,7 +8,9 @@ const app = express();
 
 const server = http.createServer(app);
 
-const url = "http://localhost:5000";
+const port = process.env.PORT || 5000;
+
+const url = `http://localhost:${port}`;
 const interval = 30000;
 
 function reloadWebsite() {
@@ -26,7 +28,7 @@ setInterval(reloadWebsite, interval);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://realtime-code-editor-by-manash.vercel.app",
   },
 });
 
@@ -118,8 +120,6 @@ io.on("connection", (socket) => {
     console.log("user Disconnected");
   });
 });
-
-const port = process.env.PORT || 5000;
 
 // const __dirname = path.resolve();
 
