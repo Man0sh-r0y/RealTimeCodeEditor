@@ -3,7 +3,8 @@ import "./App.css";
 import io from "socket.io-client";
 import Editor from "@monaco-editor/react";
 
-const socket = io("http://localhost:5000");
+//const socket = io("http://localhost:5000");
+const socket = io("https://realtimecodeeditor-tz6i.onrender.com/");
 
 const App = () => {
   const [joined, setJoined] = useState(false);
@@ -16,6 +17,18 @@ const App = () => {
   const [typing, setTyping] = useState("");
   const [outPut, setOutPut] = useState("");
   const [version, setVersion] = useState("*");
+
+  useEffect(() => {
+    const storedRoomId = localStorage.getItem("roomId");
+    const storedUserName = localStorage.getItem("userName");
+    if (storedRoomId && storedUserName) {
+      setRoomId(storedRoomId);
+      setUserName(storedUserName);
+      setJoined(true);
+      socket.emit("join", { roomId: storedRoomId, userName: storedUserName });
+    }
+  }, []);
+  
 
   useEffect(() => {
     socket.on("userJoined", (users) => {
@@ -63,17 +76,21 @@ const App = () => {
   const joinRoom = () => {
     if (roomId && userName) {
       socket.emit("join", { roomId, userName });
+      localStorage.setItem("roomId", roomId);
+      localStorage.setItem("userName", userName);
       setJoined(true);
     }
   };
 
   const leaveRoom = () => {
     socket.emit("leaveRoom");
+    localStorage.removeItem("roomId");
+    localStorage.removeItem("userName");
     setJoined(false);
     setRoomId("");
     setUserName("");
     setCode("// start code here");
-    setLanguage("javascript");
+    setLanguage("javascript");    
   };
 
   const copyRoomId = () => {
@@ -102,7 +119,7 @@ const App = () => {
     return (
       <div className="join-container">
         <div className="join-form">
-          <h1>Join Code Room</h1>
+          <h1>Enter Room ID</h1>
           <input
             type="text"
             placeholder="Room Id"
@@ -134,7 +151,7 @@ const App = () => {
         <h3>Users in Room:</h3>
         <ul>
           {users.map((user, index) => (
-            <li key={index}>{user.slice(0, 8)}...</li>
+            <li key={index}>{user.slice(0, 8)}</li>
           ))}
         </ul>
         <p className="typing-indicator">{typing}</p>

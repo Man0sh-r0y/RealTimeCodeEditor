@@ -84,23 +84,29 @@ io.on("connection", (socket) => {
   });
 
   socket.on("compileCode", async ({ code, roomId, language, version }) => {
-    if (rooms.has(roomId)) {
-      const room = rooms.get(roomId);
-      const response = await axios.post(
-        "https://emkc.org/api/v2/piston/execute",
-        {
-          language,
-          version,
-          files: [
-            {
-              content: code,
-            },
-          ],
-        }
-      );
+    try {
+      if (rooms.has(roomId)) {
+        const room = rooms.get(roomId);
+        const response = await axios.post(
+          "https://emkc.org/api/v2/piston/execute",
+          {
+            language,
+            version,
+            files: [
+              {
+                content: code,
+              },
+            ],
+          }
+        );
 
-      room.output = response.data.run.output;
-      io.to(roomId).emit("codeResponse", response.data);
+        room.output = response.data.run.output;
+        io.to(roomId).emit("codeResponse", response.data);
+
+        console.log("Code output sent to the Client: " + response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
 

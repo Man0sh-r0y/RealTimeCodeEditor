@@ -15,10 +15,48 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background-image: linear-gradient(
+    80deg,
+    hsl(240deg 86% 8%) 1%,
+    hsl(241deg 84% 10%) 37%,
+    hsl(241deg 83% 11%) 45%,
+    hsl(242deg 82% 12%) 49%,
+    hsl(243deg 83% 13%) 50%,
+    hsl(248deg 85% 14%) 51%,
+    hsl(253deg 90% 14%) 51%,
+    hsl(258deg 96% 15%) 50%,
+    hsl(261deg 100% 16%) 50%,
+    hsl(260deg 100% 18%) 49%,
+    hsl(259deg 100% 19%) 49%,
+    hsl(258deg 100% 21%) 50%,
+    hsl(257deg 100% 23%) 51%,
+    hsl(256deg 100% 25%) 55%,
+    hsl(254deg 100% 27%) 63%,
+    hsl(253deg 100% 29%) 99%
+  );
 
   .join-form {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-image: linear-gradient(
+    80deg,
+    hsl(240deg 43% 24%) 0%,
+    hsl(240deg 44% 25%) 7%,
+    hsl(239deg 46% 26%) 13%,
+    hsl(239deg 47% 26%) 20%,
+    hsl(239deg 48% 27%) 27%,
+    hsl(239deg 50% 28%) 33%,
+    hsl(238deg 51% 29%) 40%,
+    hsl(238deg 52% 29%) 47%,
+    hsl(238deg 53% 30%) 53%,
+    hsl(238deg 54% 31%) 60%,
+    hsl(238deg 55% 32%) 67%,
+    hsl(238deg 56% 32%) 73%,
+    hsl(237deg 57% 33%) 80%,
+    hsl(237deg 58% 34%) 87%,
+    hsl(237deg 59% 35%) 93%,
+    hsl(237deg 60% 35%) 100%
+  );
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,7 +65,7 @@ body {
 
     h1 {
       margin-bottom: 1.5rem;
-      color: #333;
+      color: #fff;
     }
 
     input {
@@ -64,7 +102,7 @@ body {
   .sidebar {
     width: 250px;
     padding: 1.5rem;
-    background-color: #2c3e50;
+    background-color: #0a0124;
     color: #ecf0f1;
 
     .room-info {
@@ -110,7 +148,8 @@ body {
       li {
         padding: 0.5rem;
         font-size: 0.9rem;
-        background: gray;
+        background: #f1e45b;
+        color: black;
         margin-top: 5px;
         border-radius: 5px;
       }
@@ -167,4 +206,5 @@ body {
   padding: 10px;
   font-size: 20px;
   height: 200px;
+  /* background-color: #0a0124; */
 }
