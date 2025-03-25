@@ -229,7 +229,7 @@ const App = () => {
           }}
         />
         <button className="run-btn" onClick={runCode}>
-          Execute
+          Run
         </button>
         <textarea
           className="output-console"
