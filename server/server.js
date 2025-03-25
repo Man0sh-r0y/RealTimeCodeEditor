@@ -115,13 +115,13 @@ io.on("connection", (socket) => {
 
 const port = process.env.PORT || 5000;
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
-app.use(express.static(path.join(__dirname, "../dist")));
+// app.use(express.static(path.join(__dirname, "../dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "dist", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../", "dist", "index.html"));
+// });
 
 server.listen(port, () => {
   console.log("server is working on port 5000");
