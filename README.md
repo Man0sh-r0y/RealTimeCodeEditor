@@ -36,7 +36,7 @@ The **Real-time Collaborative Code Editor** is a web-based platform that allows 
    ```
 2. Install dependencies `(for both frontend and backend)`:
    ```sh
-   npm install # 1st time run it in root directory and then in server directory
+   npm install # run it bor both
    ```
 3. Start the Frontend & Backend:
    ```sh
