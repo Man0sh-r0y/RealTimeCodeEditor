@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +10,10 @@ body {
   font-family: "Roboto", "sans-serif";
   background: rgb(40, 40, 40);
   color: #333;
+
+  font-family: "Faculty Glyphic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .join-container {
@@ -95,6 +101,11 @@ body {
   display: flex;
   height: 100vh;
 
+  h1 {
+    display: flex;
+    align-items: center;
+  }
+
   .sidebar {
     display: flex;
     flex-direction: column;
@@ -136,12 +147,22 @@ body {
       margin-top: 1.5rem;
       margin-bottom: 0.5rem;
       font-size: 1rem;
+      text-align: center;
+    }
+
+    .sidebar-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     ul {
       list-style: none;
+      display: flex;
+      flex-wrap: wrap;
 
       li {
+        width: max-content;
         padding: 0.5rem;
         font-size: 0.9rem;
         /* background: #695b83; */

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import io from "socket.io-client";
 import Editor from "@monaco-editor/react";
+import { FaCodeBranch } from "react-icons/fa";
+import "./App.css";
 
 //const socket = io("http://localhost:5000");
 const socket = io("https://realtimecodeeditor-tz6i.onrender.com/");
@@ -149,10 +150,13 @@ const App = () => {
   return (
     <div className="editor-container">
       <div className="sidebar">
-        <div>
+        <div className="sidebar-header">
           <div className="room-info">
             {/* <h2>Code Room: {roomId}</h2> */}
-            <h1>CodeCollab</h1>
+            <h1>
+              <FaCodeBranch color="#4a90e2" />
+              CodeCollab
+            </h1>
             {/* <button onClick={copyRoomId} className="copy-button">
             Copy Id
           </button> */}
@@ -220,7 +224,7 @@ const App = () => {
           theme="vs-dark"
           options={{
             minimap: { enabled: false },
-            fontSize: 14,
+            fontSize: 20,
           }}
         />
         <button className="run-btn" onClick={runCode}>
