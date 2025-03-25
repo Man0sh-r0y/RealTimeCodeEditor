@@ -6,7 +6,7 @@
 
 body {
   font-family: "Roboto", "sans-serif";
-  background: #f0f2f5;
+  background: rgb(40, 40, 40);
   color: #333;
 }
 
@@ -16,47 +16,43 @@ body {
   align-items: center;
   height: 100vh;
   /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
-  background-image: linear-gradient(
-    80deg,
-    hsl(240deg 86% 8%) 1%,
-    hsl(241deg 84% 10%) 37%,
-    hsl(241deg 83% 11%) 45%,
-    hsl(242deg 82% 12%) 49%,
-    hsl(243deg 83% 13%) 50%,
-    hsl(248deg 85% 14%) 51%,
-    hsl(253deg 90% 14%) 51%,
-    hsl(258deg 96% 15%) 50%,
-    hsl(261deg 100% 16%) 50%,
-    hsl(260deg 100% 18%) 49%,
-    hsl(259deg 100% 19%) 49%,
-    hsl(258deg 100% 21%) 50%,
-    hsl(257deg 100% 23%) 51%,
-    hsl(256deg 100% 25%) 55%,
-    hsl(254deg 100% 27%) 63%,
-    hsl(253deg 100% 29%) 99%
-  );
+  background-image: linear-gradient(80deg,
+      hsl(240deg 86% 8%) 1%,
+      hsl(241deg 84% 10%) 37%,
+      hsl(241deg 83% 11%) 45%,
+      hsl(242deg 82% 12%) 49%,
+      hsl(243deg 83% 13%) 50%,
+      hsl(248deg 85% 14%) 51%,
+      hsl(253deg 90% 14%) 51%,
+      hsl(258deg 96% 15%) 50%,
+      hsl(261deg 100% 16%) 50%,
+      hsl(260deg 100% 18%) 49%,
+      hsl(259deg 100% 19%) 49%,
+      hsl(258deg 100% 21%) 50%,
+      hsl(257deg 100% 23%) 51%,
+      hsl(256deg 100% 25%) 55%,
+      hsl(254deg 100% 27%) 63%,
+      hsl(253deg 100% 29%) 99%);
 
   .join-form {
     /* background-color: #fff; */
-    background-image: linear-gradient(
-    80deg,
-    hsl(240deg 43% 24%) 0%,
-    hsl(240deg 44% 25%) 7%,
-    hsl(239deg 46% 26%) 13%,
-    hsl(239deg 47% 26%) 20%,
-    hsl(239deg 48% 27%) 27%,
-    hsl(239deg 50% 28%) 33%,
-    hsl(238deg 51% 29%) 40%,
-    hsl(238deg 52% 29%) 47%,
-    hsl(238deg 53% 30%) 53%,
-    hsl(238deg 54% 31%) 60%,
-    hsl(238deg 55% 32%) 67%,
-    hsl(238deg 56% 32%) 73%,
-    hsl(237deg 57% 33%) 80%,
-    hsl(237deg 58% 34%) 87%,
-    hsl(237deg 59% 35%) 93%,
-    hsl(237deg 60% 35%) 100%
-  );
+    background-image: linear-gradient(80deg,
+        hsl(240deg 43% 24%) 0%,
+        hsl(240deg 44% 25%) 7%,
+        hsl(239deg 46% 26%) 13%,
+        hsl(239deg 47% 26%) 20%,
+        hsl(239deg 48% 27%) 27%,
+        hsl(239deg 50% 28%) 33%,
+        hsl(238deg 51% 29%) 40%,
+        hsl(238deg 52% 29%) 47%,
+        hsl(238deg 53% 30%) 53%,
+        hsl(238deg 54% 31%) 60%,
+        hsl(238deg 55% 32%) 67%,
+        hsl(238deg 56% 32%) 73%,
+        hsl(237deg 57% 33%) 80%,
+        hsl(237deg 58% 34%) 87%,
+        hsl(237deg 59% 35%) 93%,
+        hsl(237deg 60% 35%) 100%);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -100,10 +96,14 @@ body {
   height: 100vh;
 
   .sidebar {
-    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
     padding: 1.5rem;
-    background-color: #0a0124;
+    background-color: rgb(40, 40, 40);
     color: #ecf0f1;
+    border-right: 1px solid rgb(163, 163, 163);
 
     .room-info {
       display: flex;
@@ -117,7 +117,7 @@ body {
         font-size: 1.2rem;
       }
 
-      .copy-button {
+      /* .copy-button {
         padding: 0.5rem 1rem;
         background-color: #3498db;
         color: white;
@@ -129,13 +129,7 @@ body {
         &:hover {
           background-color: #2980b9;
         }
-      }
-
-      .copy-success {
-        margin-left: 0.5rem;
-        color: rgb(38, 167, 38);
-        font-size: 0.8rem;
-      }
+      } */
     }
 
     h3 {
@@ -143,16 +137,25 @@ body {
       margin-bottom: 0.5rem;
       font-size: 1rem;
     }
+
     ul {
       list-style: none;
+
       li {
         padding: 0.5rem;
         font-size: 0.9rem;
-        background: #f1e45b;
-        color: black;
+        /* background: #695b83; */
+        color: rgb(201, 201, 201);
         margin-top: 5px;
         border-radius: 5px;
       }
+    }
+
+    .avatar-image {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
     .typing-indicator {
@@ -165,14 +168,43 @@ body {
       margin-top: 1rem;
       width: 100%;
       padding: 0.5rem;
-      background-color: #34495e;
+      background-color: rgb(40, 40, 40);
+      border: 1px solid rgb(137, 136, 136);
       color: white;
-      border: none;
       border-radius: 4px;
     }
 
+    .copy-button {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #2980b9;
+      }
+    }
+
+    .copy-success {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: rgb(40, 40, 40);
+      color: greenyellow;
+      border: 1px solid rgb(124, 124, 124);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
     .leave-button {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       width: 100%;
       padding: 0.75rem;
       background-color: #e74c3c;
@@ -191,20 +223,48 @@ body {
 
   .editor-wrapper {
     flex-grow: 1;
-    background-color: #fff;
+    background-color: rgb(40, 40, 40);
+    display: flex;
+    flex-direction: column;
   }
 }
 
 .run-btn {
   background-color: rgb(12, 209, 38);
   padding: 10px;
+  width: 5rem;
+  align-items: end;
+  justify-content: end;
+  justify-self: end;
+  align-self: flex-end;
+  cursor: pointer;
 }
 
 .output-console {
   width: 100%;
+  height: 30%;
   margin-top: 10px;
   padding: 10px;
   font-size: 20px;
   height: 200px;
-  /* background-color: #0a0124; */
+  background-color: rgb(40, 40, 40);
+  color: rgb(155, 150, 150);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  display: none;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 9px;
+  display: block;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(153 27 27);
+  /* Equivalent to bg-rose-900 */
+  border-radius: 0.75rem;
+  /* Equivalent to rounded-xl */
 }

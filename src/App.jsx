@@ -28,7 +28,7 @@ const App = () => {
       socket.emit("join", { roomId: storedRoomId, userName: storedUserName });
     }
   }, []);
-  
+
 
   useEffect(() => {
     socket.on("userJoined", (users) => {
@@ -90,7 +90,7 @@ const App = () => {
     setRoomId("");
     setUserName("");
     setCode("// start code here");
-    setLanguage("javascript");    
+    setLanguage("javascript");
   };
 
   const copyRoomId = () => {
@@ -114,6 +114,14 @@ const App = () => {
   const runCode = () => {
     socket.emit("compileCode", { code, roomId, language, version });
   };
+
+  const getUserInitials = (name) => {
+    const words = name.trim().split(" ");
+    if (words.length === 1) return words[0][0].toUpperCase(); // If only one word, take the first letter
+    return (words[0][0] + words[1][0]).toUpperCase(); // Take first letter of first and last name
+  };
+
+
 
   if (!joined) {
     return (
@@ -141,38 +149,70 @@ const App = () => {
   return (
     <div className="editor-container">
       <div className="sidebar">
-        <div className="room-info">
-          <h2>Code Room: {roomId}</h2>
-          <button onClick={copyRoomId} className="copy-button">
+        <div>
+          <div className="room-info">
+            {/* <h2>Code Room: {roomId}</h2> */}
+            <h1>CodeCollab</h1>
+            {/* <button onClick={copyRoomId} className="copy-button">
             Copy Id
-          </button>
-          {copySuccess && <span className="copy-success">{copySuccess}</span>}
-        </div>
-        <h3>Users in Room:</h3>
-        <ul>
-          {users.map((user, index) => (
+          </button> */}
+          </div>
+
+          <div>
+            <h3>Connected Users:</h3>
+            <ul>
+              {/* {users.map((user, index) => (
             <li key={index}>{user.slice(0, 8)}</li>
-          ))}
-        </ul>
+          ))} */}
+              {users.map((user, index) => {
+                const initials = user ? getUserInitials(user) : "User"; // Default to "U" if user is undefined
+                const avatarUrl = `https://api.dicebear.com/5.x/initials/svg?seed=${initials}`;
+
+                return (
+                  <li key={index} className="user-avatar">
+                    <div className="avatar-circle">
+                      <img
+                        src={avatarUrl}
+                        alt={user || "Unknown"}
+                        className="avatar-image"
+                        onError={(e) => e.target.src = "https://via.placeholder.com/40"} // Fallback in case of API failure
+                      />
+                    </div>
+                  </li>
+                );
+              })}
+
+            </ul>
+          </div>
+        </div>
         <p className="typing-indicator">{typing}</p>
-        <select
-          className="language-selector"
-          value={language}
-          onChange={handleLanguageChange}
-        >
-          <option value="javascript">JavaScript</option>
-          <option value="python">Python</option>
-          <option value="java">Java</option>
-          <option value="cpp">C++</option>
-        </select>
-        <button className="leave-button" onClick={leaveRoom}>
-          Leave Room
-        </button>
+        <div>
+          <select
+            className="language-selector"
+            value={language}
+            onChange={handleLanguageChange}
+          >
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+          </select>
+
+          {copySuccess && <div className="copy-success">{copySuccess}</div>}
+
+          <button onClick={copyRoomId} className="copy-button">
+            Copy Room ID
+          </button>
+
+          <button className="leave-button" onClick={leaveRoom}>
+            Leave
+          </button>
+        </div>
       </div>
 
       <div className="editor-wrapper">
         <Editor
-          height={"60%"}
+          height={"100%"}
           defaultLanguage={language}
           language={language}
           value={code}
