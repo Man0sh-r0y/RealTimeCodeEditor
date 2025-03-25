@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { FaCodeBranch } from "react-icons/fa";
 import "./App.css";
 
-//const socket = io("http://localhost:5000");
+//const socket = io("http://localhost:5000/");
 const socket = io("https://realtimecodeeditor-tz6i.onrender.com/");
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [typing, setTyping] = useState("");
   const [outPut, setOutPut] = useState("");
+  const [lockedBy, setLockedBy] = useState(null);
   const [version, setVersion] = useState("*");
 
   useEffect(() => {
@@ -29,6 +30,22 @@ const App = () => {
       socket.emit("join", { roomId: storedRoomId, userName: storedUserName });
     }
   }, []);
+
+  useEffect(() => {
+    socket.on("editorLocked", ({ userName }) => {
+      setLockedBy(userName);
+    });
+  
+    socket.on("editorUnlocked", () => {
+      setLockedBy(null);
+    });
+  
+    return () => {
+      socket.off("editorLocked");
+      socket.off("editorUnlocked");
+    };
+  }, []);
+  
 
 
   useEffect(() => {
@@ -52,6 +69,14 @@ const App = () => {
     socket.on("codeResponse", (response) => {
       setOutPut(response.run.output);
     });
+
+    socket.on("lockEditor", ({ roomId, userName }) => {
+      socket.to(roomId).emit("editorLocked", { userName });
+    });
+    
+    socket.on("unlockEditor", ({ roomId }) => {
+      socket.to(roomId).emit("editorUnlocked");
+    });    
 
     return () => {
       socket.off("userJoined");
@@ -101,9 +126,26 @@ const App = () => {
   };
 
   const handleCodeChange = (newCode) => {
+    // setCode(newCode);
+    // socket.emit("codeChange", { roomId, code: newCode });
+    // socket.emit("typing", { roomId, userName });
+    if (lockedBy && lockedBy !== userName) return; // Prevent editing if locked by another user
+
     setCode(newCode);
     socket.emit("codeChange", { roomId, code: newCode });
     socket.emit("typing", { roomId, userName });
+
+    if (!lockedBy) {
+      setLockedBy(userName);
+      socket.emit("lockEditor", { roomId, userName });
+    }
+
+    // Unlock after inactivity (e.g., 5 seconds)
+    clearTimeout(window.typingTimeout);
+    window.typingTimeout = setTimeout(() => {
+      setLockedBy(null);
+      socket.emit("unlockEditor", { roomId });
+    }, 5000);
   };
 
   const handleLanguageChange = (e) => {

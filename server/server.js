@@ -17,7 +17,7 @@ function reloadWebsite() {
   axios
     .get(url)
     .then((response) => {
-      console.log("website reloded");
+      console.log("website relodeded!");
     })
     .catch((error) => {
       console.error(`Error : ${error.message}`);
@@ -31,6 +31,8 @@ const io = new Server(server, {
     origin: "https://realtime-code-editor-by-manash.vercel.app",
   },
 });
+
+// origin: "https://realtime-code-editor-by-manash.vercel.app",
 
 const rooms = new Map();
 
