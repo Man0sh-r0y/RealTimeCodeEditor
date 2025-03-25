@@ -11,7 +11,6 @@ The **Real-time Collaborative Code Editor** is a web-based platform that allows 
 * **Syntax Highlighting** : Provides a smooth coding experience.
 * **Multi-language Support** : Supports various programming languages.
 * **User Presence Indication** : Shows active users in the session.
-* **Efficient Conflict Handling** : Manages simultaneous edits to avoid conflicts.
 * **Lightweight and Fast** : Optimized for performance and minimal latency.
 
 ## Tech Stack
